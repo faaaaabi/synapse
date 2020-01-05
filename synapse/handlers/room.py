@@ -372,11 +372,10 @@ class RoomCreationHandler(BaseHandler):
             # contents are preserved as the state for the old room later on
             existing_power_levels = initial_state[(EventTypes.PowerLevels, "")]
             new_power_levels = copy.deepcopy(existing_power_levels)
+            initial_state[(EventTypes.PowerLevels, "")] = new_power_levels
 
             # Assign this power level to the requester
             new_power_levels["users"][requester.user.to_string()] = needed_power_level
-
-            initial_state[(EventTypes.PowerLevels, "")] = new_power_levels
 
         yield self._send_events_for_new_room(
             requester,
