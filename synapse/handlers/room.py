@@ -389,8 +389,6 @@ class RoomCreationHandler(BaseHandler):
             creation_content=creation_content,
         )
 
-        initial_state[(EventTypes.PowerLevels, "")] = existing_power_levels
-
         # Transfer membership events
         old_room_member_state_ids = yield self.store.get_filtered_current_state_ids(
             old_room_id, StateFilter.from_types([(EventTypes.Member, None)])
